@@ -1,0 +1,44 @@
+
+
+  <div class="row justify-content-center" data-controller="bookmark">
+    <h1 class="p-0 mb-3">Your lists</h1>
+    <div class="col-8">
+
+          <% @lists.each do |list| %>
+
+              <div class="row justify-content-between border border-1 py-2">
+
+
+                  <div class="col-6"><%= list.name %></div>
+                  <div class="col-3">
+                    <%= link_to "+", "#", :class => "py-0 px-2 btn btn-success add-bookmark", "data-list-name" => list.name, "data-list-id" => list.id, "data-action" => "click->bookmark#prepareForm:prevent" %>
+                    <%= link_to "go to list ->", list_path(list), :class => "py-0 px-2 btn btn-success add-bookmark"%>
+                  </div>
+
+              </div>
+          <% end %>
+          <div class="row">
+          <%= simple_form_for @list, :url => create_list_path do |f| %>
+             <div class="row justify-content-between mt-2">
+               <div class="col-8 px-0 combo-input">
+                  <%= f.input :name, label: false, placeholder: 'create new list' %>
+
+                </div>
+               <div class="col-4"><%= f.button :submit, value: '+', :class => 'btn btn-success'%></div>
+             </div>
+          <% end %>
+    </div>
+    </div>
+    <div class="col-4" >
+
+    <div data-bookmark-target="form" class="display-off quick-bookmark-form">
+      <p class="form-title"></p>
+      <%= simple_form_for @bookmark, :url => create_bookmark_path do |f| %>
+        <%= f.association :movie, prompt: "Pick a movie to add", :label => false %>
+        <%= f.input_field :list_id, as: :hidden, value: "0", "data-bookmark-target" => "listId" %>
+        <%= f.button :submit, value: 'add', class: 'btn btn-primary'%>
+      <% end %>
+    </div>
+
+    </div>
+  </div>

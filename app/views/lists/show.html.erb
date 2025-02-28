@@ -1,0 +1,27 @@
+
+
+  <h2>movies in: <strong><%= @list.name %></strong></h2>
+  <div class="row">
+    <div class="col-6">
+        <% if @list.movies.count == 0 %>
+          <p>There are no movies in this list yet</p>
+        <% else %>
+          <% @list.movies.each do |movie|%>
+            <div class="row">
+
+              <h3><%= movie.title %></h3>
+              <span><strong><%= movie.genre%></strong></span>
+              <p><%= movie.description%></p>
+
+            </div>
+          <% end %>
+        <% end %>
+
+    </div>
+    <div class="col-6">
+
+
+
+    </div>
+  </div>
+  <%= link_to "back to lists",  app_path%>

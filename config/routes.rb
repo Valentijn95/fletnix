@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: "main#index"
+  get '/', to: "main#index"
   get 'api/movies', to: "api#movies"
 
   get 'app', to: "main#user_index", as: "app"
@@ -9,10 +10,9 @@ Rails.application.routes.draw do
 
   post 'bookmark', to: "bookmarks#create", as: "create_bookmark"
 
+  get 'lists', to: 'main#user_index'
+
   devise_for :users
-
-
-  get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
   # root "posts#index"
